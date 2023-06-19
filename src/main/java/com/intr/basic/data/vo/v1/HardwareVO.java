@@ -1,26 +1,23 @@
-package com.intr.basic.Model;
-
+package com.intr.basic.data.vo.v1;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "Hardware")
-public class Hardware implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class HardwareVO implements Serializable {
+
+
     private Long id;
     private static final long serialVersionUID = 1L;
 
 
-    public Hardware(){
+    public HardwareVO(){
     }
 
+    private String category;
     private String model;
     private String config;
-    private String category;
+
 
     private Double price;
     public String getCategory() {
@@ -67,7 +64,7 @@ public class Hardware implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hardware hardware = (Hardware) o;
+        HardwareVO hardware = (HardwareVO) o;
         return Objects.equals(id, hardware.id) && Objects.equals(model, hardware.model) && Objects.equals(price, hardware.price) && Objects.equals(config, hardware.config) && Objects.equals(category, hardware.category);
     }
 

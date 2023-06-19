@@ -1,90 +1,83 @@
 package com.intr.basic.Services;
 
+import com.intr.basic.Exceptions.ResourceNotFoundException;
 import com.intr.basic.Model.Hardware;
+import com.intr.basic.Repository.HardwareRepository;
+import com.intr.basic.data.vo.v1.HardwareVO;
+import com.intr.basic.mapper.DozerMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
 public class HardwareService {
 
-    private final AtomicLong counter = new AtomicLong();
     private final Logger logger = Logger.getLogger(HardwareService.class.getName());
 
-    public List<Hardware> findAll(){
+    @Autowired
+    HardwareRepository repository;
 
-        List<Hardware> hardwares = new ArrayList<>();
+
+    public List<HardwareVO> findAll(){
 
         logger.info("Finding all Hardwares!");
-        for(int i = 0; i < 8; i++){
-            Hardware hardware = mockPerson(i);
-            hardwares.add(hardware);
-        }
 
-        return hardwares;
+        return DozerMapper.parseList(repository.findAll(), HardwareVO.class);
     }
 
 
-    public Hardware findById(String id){
+    public HardwareVO findById(Long id){
 
-        logger.info("Finding one Hardware!");
-        Hardware hardware = new Hardware();
+        logger.info("Finding one HardwareVO!");
 
-        Long id_long = Long.parseLong(id);
-        hardware.setId(id_long);
-        hardware.setModel("Gamer");
-        hardware.setConfig("Ryzen 5 5600x");
-        hardware.setCategory("CPU");
-        hardware.setPrice(2500.0);
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
+        return DozerMapper.parseObject(entity, HardwareVO.class);
 
-        return hardware;
     }
 
-    public Hardware create(Hardware hardwares) {
+    public HardwareVO create(HardwareVO hardware) {
 
         logger.info("Creating one hardwares");
+        var entity = DozerMapper.parseObject(hardware, Hardware.class);
 
-        return hardwares;
+        return DozerMapper.parseObject(repository.save(entity), HardwareVO.class);
 
 
     }
 
-    public Hardware update(Hardware hardware) {
+    public HardwareVO update(HardwareVO hardware) {
 
         logger.info("Updating one hardware");
 
-        return hardware;
+        var entity = repository.findById(hardware.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        entity.setModel(hardware.getModel());
+        entity.setCategory(hardware.getCategory());
+        entity.setConfig(hardware.getConfig());
+        entity.setPrice(hardware.getPrice());
+
+        return DozerMapper.parseObject(repository.save(entity), HardwareVO.class);
+
+
 
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
 
         logger.info("Deleting one hardware");
 
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+
+        repository.delete(entity);
 
     }
 
 
 
-    private Hardware mockPerson(int i) {
-
-        Hardware hardware = new Hardware();
-        hardware.setId(counter.incrementAndGet());
-        hardware.setModel("Gamer");
-        hardware.setConfig("Ryzen 5 5600x");
-        hardware.setCategory("CPU");
-        hardware.setPrice(2500.0);
-
-
-
-        return hardware;
-
-
-    }
 
 
 }

@@ -1,9 +1,10 @@
 package com.intr.basic.Controllers;
 
-import com.intr.basic.Model.Hardware;
 import com.intr.basic.Services.HardwareService;
+import com.intr.basic.data.vo.v1.HardwareVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,39 +18,42 @@ public class HardwareController {
 
 
 
-    @RequestMapping(value = "/{id}", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Hardware findById(@PathVariable(value = "id") String id) throws Exception{
+    @GetMapping( value = "/{id}",
+                produces = MediaType.APPLICATION_JSON_VALUE)
+    public HardwareVO findById(@PathVariable(value = "id") Long id) throws Exception{
 
         return  hardwareService.findById(id);
 
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Hardware> findAll(){
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<HardwareVO> findAll(){
 
         return  hardwareService.findAll();
 
 
     }
 
-    @RequestMapping(method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Hardware create(@RequestBody Hardware person){
-
-        return  hardwareService.create(person);
+    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HardwareVO create(@RequestBody HardwareVO hardware){
+        return  hardwareService.create(hardware);
 
     }
 
-    @RequestMapping(method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Hardware update(@RequestBody Hardware person){
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HardwareVO update(@RequestBody HardwareVO person){
 
         return  hardwareService.update(person);
 
     }
 
-    @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
-    public void delete(@PathVariable(value = "id") String id){
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
 
         hardwareService.delete(id);
+        return ResponseEntity.noContent().build();
 
     }
 
