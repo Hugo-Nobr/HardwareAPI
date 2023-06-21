@@ -89,6 +89,7 @@ Copy code
   "tipo": "Tipo 1",
   "preco": 100.0
 }
+
 **Resposta em YAML:**
 
 yaml
@@ -108,5 +109,5 @@ Copy code
   <preco>100.0</preco>
 </hardware>
 
-Contribuição
+**Contribuição**
 Se você deseja contribuir para o desenvolvimento da API HARDWARE_API, fique à vontade para fazer um fork do repositório, implementar melhorias e enviar um pull request.
