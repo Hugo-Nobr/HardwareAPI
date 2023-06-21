@@ -2,6 +2,7 @@
 HARDWARE_API é uma API Restful desenvolvida em Spring Boot que permite recuperar informações sobre diversos hardwares. A API suporta formatos de resposta em JSON, YAML e XML, oferecendo flexibilidade aos consumidores.
 
 **#Recursos Disponíveis**
+
 A API HARDWARE_API disponibiliza os seguintes recursos:
 
 /hardwares: Recupera uma lista de todos os hardwares disponíveis.
@@ -13,10 +14,11 @@ JSON: Utilize o cabeçalho "Accept: application/json" para receber a resposta em
 YAML: Utilize o cabeçalho "Accept: application/x-yaml" para receber a resposta em YAML.
 XML: Utilize o cabeçalho "Accept: application/xml" para receber a resposta em XML.
 Executando a API
+
 **Para executar a API HARDWARE_API, siga as etapas abaixo:**
 
 Certifique-se de ter o Java Development Kit (JDK) instalado em sua máquina.
-Faça o download do código-fonte do projeto ou clone-o através do comando git clone <URL do repositório>.
+Faça o download do código-fonte do projeto ou clone-o através do comando git clone <[URL do repositório](https://github.com/Hugo-Nobr/Hardware_API)>.
 Navegue até o diretório raiz do projeto.
 Execute o comando ./mvnw spring-boot:run para iniciar a aplicação.
 A API estará disponível em http://localhost:8080.
@@ -76,6 +78,7 @@ Copy code
   </hardware>
   ...
 </hardwares>
+
 **#Recuperar um hardware específico**
 URL: GET http://localhost:8080/hardwares/1
 
