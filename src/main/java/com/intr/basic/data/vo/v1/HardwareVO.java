@@ -1,25 +1,32 @@
 package com.intr.basic.data.vo.v1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 
-public class HardwareVO implements Serializable {
+@JsonPropertyOrder({"id", "category", "model", "config", "price"})
+public class HardwareVO extends RepresentationModel<HardwareVO> implements Serializable {
 
 
-    private Long id;
+
+    @Mapping("id")
+    @JsonProperty("id")
+    private Long key;
+    private String category;
+    private String model;
+    private Double price;
+    private String config;
+
     private static final long serialVersionUID = 1L;
-
 
     public HardwareVO(){
     }
 
-    private String category;
-    private String model;
-    private String config;
-
-
-    private Double price;
     public String getCategory() {
         return category;
     }
@@ -28,13 +35,6 @@ public class HardwareVO implements Serializable {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getModel() {
         return model;
@@ -60,18 +60,26 @@ public class HardwareVO implements Serializable {
         this.config = config;
     }
 
+    public Long getKey() {
+        return key;
+    }
+
+    public void setKey(Long key) {
+        this.key = key;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HardwareVO hardware = (HardwareVO) o;
-        return Objects.equals(id, hardware.id) && Objects.equals(model, hardware.model) && Objects.equals(price, hardware.price) && Objects.equals(config, hardware.config) && Objects.equals(category, hardware.category);
+        if (!super.equals(o)) return false;
+        HardwareVO that = (HardwareVO) o;
+        return Objects.equals(category, that.category) && Objects.equals(model, that.model) && Objects.equals(price, that.price) && Objects.equals(config, that.config) && Objects.equals(key, that.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, price, config, category);
+        return Objects.hash(super.hashCode(), category, model, price, config, key);
     }
-
 
 }

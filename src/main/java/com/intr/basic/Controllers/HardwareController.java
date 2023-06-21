@@ -1,9 +1,10 @@
 package com.intr.basic.Controllers;
 
 import com.intr.basic.Services.HardwareService;
+import com.intr.basic.Util.MediaType;
 import com.intr.basic.data.vo.v1.HardwareVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +20,18 @@ public class HardwareController {
 
 
     @GetMapping( value = "/{id}",
-                produces = MediaType.APPLICATION_JSON_VALUE)
-    public HardwareVO findById(@PathVariable(value = "id") Long id) throws Exception{
+                produces = {MediaType.APPLICATION_JSON,
+                        MediaType.APPLICATION_XML,
+                        MediaType.APPLICATION_YML})
+    public HardwareVO findById(@PathVariable(value = "id") Long id){
 
         return  hardwareService.findById(id);
 
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_JSON,
+            MediaType.APPLICATION_XML,
+            MediaType.APPLICATION_YML})
     public List<HardwareVO> findAll(){
 
         return  hardwareService.findAll();
@@ -34,15 +39,24 @@ public class HardwareController {
 
     }
 
-    @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            consumes = {MediaType.APPLICATION_JSON,
+                    MediaType.APPLICATION_XML,
+                    MediaType.APPLICATION_YML},
+            produces = {MediaType.APPLICATION_JSON,
+                    MediaType.APPLICATION_XML,
+                    MediaType.APPLICATION_YML})
     public HardwareVO create(@RequestBody HardwareVO hardware){
         return  hardwareService.create(hardware);
 
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON,
+            MediaType.APPLICATION_XML,
+            MediaType.APPLICATION_YML},
+            produces = {MediaType.APPLICATION_JSON,
+                    MediaType.APPLICATION_XML,
+                    MediaType.APPLICATION_YML})
     public HardwareVO update(@RequestBody HardwareVO person){
 
         return  hardwareService.update(person);
