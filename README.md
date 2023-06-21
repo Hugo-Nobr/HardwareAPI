@@ -28,8 +28,6 @@ URL: GET http://localhost:8080/hardwares
 
 **Resposta em JSON:**
 
-json
-Copy code
 [
   {
     "id": 1,
@@ -47,8 +45,6 @@ Copy code
 ]
 **Resposta em YAML:**
 
-yaml
-Copy code
 - id: 1
   nome: Hardware 1
   tipo: Tipo 1
@@ -61,8 +57,6 @@ Copy code
 
 **Resposta em XML:**
 
-xml
-Copy code
 <hardwares>
   <hardware>
     <id>1</id>
@@ -84,8 +78,6 @@ URL: GET http://localhost:8080/hardwares/1
 
 **Resposta em JSON:**
 
-json
-Copy code
 {
   "id": 1,
   "nome": "Hardware 1",
@@ -95,22 +87,20 @@ Copy code
 
 **Resposta em YAML:**
 
-yaml
-Copy code
 id: 1
 nome: Hardware 1
 tipo: Tipo 1
 preco: 100.0
-Resposta em XML:
+
 
 **xml**
-Copy code
 <hardware>
   <id>1</id>
   <nome>Hardware 1</nome>
   <tipo>Tipo 1</tipo>
   <preco>100.0</preco>
 </hardware>
+
 
 **Contribuição**
 Se você deseja contribuir para o desenvolvimento da API HARDWARE_API, fique à vontade para fazer um fork do repositório, implementar melhorias e enviar um pull request.
