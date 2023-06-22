@@ -43,6 +43,7 @@ URL: GET http://localhost:8080/hardwares
   },
   ...
 ]
+
 **Resposta em YAML:**
 
 - id: 1
